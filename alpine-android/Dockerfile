@@ -11,4 +11,8 @@ RUN apk --no-cache add openssl git curl \
 
 RUN apk add --update make
 
+# Generating debug.keystore
+RUN keytool -genkey -v -keystore ~/.android/debug.keystore -alias androiddebugkey \
+    -storepass android -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+
 WORKDIR /home/android
