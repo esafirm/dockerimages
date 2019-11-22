@@ -19,7 +19,8 @@ RUN apk add --update \
     make \
     ruby \
     ruby-irb \
-    ruby-dev
+    ruby-dev \
+    bc
 
 ## Fastlane
 ENV FASTLANE_VERSION=2.80.0
