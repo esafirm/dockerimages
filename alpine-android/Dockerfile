@@ -45,3 +45,7 @@ RUN keytool -genkey -v -keystore ~/.android/debug.keystore -alias androiddebugke
     -storepass android -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US" 
 
 WORKDIR /home/android
+
+## Add Dropbox CLI
+
+ADD dbxcli dbxcli
