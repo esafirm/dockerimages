@@ -1,5 +1,5 @@
 .DEFAULT_GOAL:=build
-.PHONY=build push run
+.PHONY=build push run create
 
 SHELL:=/usr/bin/env bash
 
@@ -10,6 +10,8 @@ build:
 
 push:
 	docker push esafirm/alpine-android:$(tag)
+
+create: build push
 
 run:
 	docker build -t esafirm/temp . && docker run -it -e DBX_AUTH_TOKEN=${DBX_AUTH_TOKEN} esafirm/temp /bin/bash
