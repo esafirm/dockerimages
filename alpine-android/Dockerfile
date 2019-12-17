@@ -48,6 +48,7 @@ WORKDIR /home/android
 
 ## Add Dropbox CLI
 ADD dbxcli /bin/dbxcli
+ADD gdrive /bin/gdrive
 ADD init.sh /bin/init.sh
 ADD entrypoint.sh /bin/entrypoint.sh
 ENTRYPOINT [ "entrypoint.sh" ]
