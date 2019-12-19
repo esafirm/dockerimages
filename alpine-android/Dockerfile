@@ -10,7 +10,7 @@ RUN apk --no-cache add openssl git curl \
     && rm -rf git-lfs-linux-amd64-2.0.1.tar.gz
 
 ## Deps
-RUN apk add --update \
+RUN apk --no-cache add --update \
     ca-certificates \
     wget \
     unzip \
@@ -20,7 +20,8 @@ RUN apk add --update \
     ruby \
     ruby-irb \
     ruby-dev \
-    bc
+    bc \
+    coreutils
 
 ## Fastlane
 ENV FASTLANE_VERSION=2.80.0
