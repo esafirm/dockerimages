@@ -24,7 +24,7 @@ RUN apk --no-cache add --update \
     coreutils
 
 ## Fastlane
-ENV FASTLANE_VERSION=2.80.0
+ENV FASTLANE_VERSION=2.138.0
 RUN gem install fastlane -N -v $FASTLANE_VERSION    
 
 ## Resolve Jenkins issue https://github.com/gradle/gradle/issues/3117
