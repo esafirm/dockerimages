@@ -23,6 +23,11 @@ RUN apk --no-cache add --update \
     bc \
     coreutils
 
+## Firebase
+RUN curl -Lo ./firebase https://firebase.tools/bin/linux/latest \
+    && chmod +xr firebase \
+    && mv firebase /bin/firebase
+
 ## Fastlane
 ENV FASTLANE_VERSION=2.138.0
 RUN gem install fastlane -N -v $FASTLANE_VERSION    
