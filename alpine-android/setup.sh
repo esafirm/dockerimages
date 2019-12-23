@@ -14,6 +14,16 @@ GDRIVE_DEST=usr/local/bin/gdrive
 ## In case it doesn't exist
 mkdir -p /usr/local/bin
 
+OS=$(uname)
+
+if [[ -z $(command -v dbxcli) ]]; then
+    NEED_DBX=true
+fi
+
+if [[ -z $(command -v gdrive) ]]; then
+    NEED_GDRIVE=true
+fi
+
 installDbx() {
     LINK=$1
     if [[ $NEED_DBX ]]; then
@@ -33,16 +43,6 @@ installGdrive() {
         echo "Machine already have gdrive"
     fi
 }
-
-OS=$(uname)
-
-if [[ $(command -v dbxcli) ]]; then
-    NEED_DBX=true
-fi
-
-if [[ $(command -v gdrive) ]]; then
-    NEED_GDRIVE=true
-fi
 
 if [[ $OS == "Darwin" ]]; then
     installDbx $DBX_OSX_LINK
