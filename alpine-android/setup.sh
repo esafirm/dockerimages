@@ -11,11 +11,16 @@ GDRIVE_OSX_LINK="$GITHUB_BASE/osx/gdrive?raw=true"
 DBX_DEST=usr/local/bin/dbxcli
 GDRIVE_DEST=usr/local/bin/gdrive
 
+## In case it doesn't exist
+mkdir -p /usr/local/bin
+
 installDbx() {
     LINK=$1
     if [[ $NEED_DBX ]]; then
         curl -sL $LINK > $DBX_DEST
         chmod +x $DBX_DEST
+    else
+        echo "Machine already have dbxcli"
     fi
 }
 
@@ -24,6 +29,8 @@ installGdrive() {
     if [[ $NEED_GDRIVE ]]; then
         curl -sL $LINK > $GDRIVE_DEST
         chmod +x $GDRIVE_DEST
+    else
+        echo "Machine already have gdrive"
     fi
 }
 
