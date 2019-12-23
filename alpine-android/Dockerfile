@@ -47,9 +47,8 @@ RUN keytool -genkey -v -keystore ~/.android/debug.keystore -alias androiddebugke
 
 WORKDIR /home/android
 
-## Add Dropbox CLI
-ADD dbxcli /bin/dbxcli
-ADD gdrive /bin/gdrive
+## Add required bins
+ADD bin/linux/ /bin/
 ADD init.sh /bin/init.sh
 ADD entrypoint.sh /bin/entrypoint.sh
 ENTRYPOINT [ "entrypoint.sh" ]
