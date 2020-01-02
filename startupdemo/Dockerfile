@@ -8,4 +8,4 @@ CMD echo "Hello CMD" >> hello
 
 COPY entrypoint.sh bin/entrypoint.sh
 
-ENTRYPOINT [ "entrypoint.sh"]
+ENTRYPOINT [ "entrypoint.sh" ]
