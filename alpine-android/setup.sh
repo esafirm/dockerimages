@@ -8,8 +8,8 @@ GDRIVE_LINUX_LINK="$GITHUB_BASE/linux/gdrive?raw=true"
 DBX_OSX_LINK="$GITHUB_BASE/osx/dbxcli?raw=true"
 GDRIVE_OSX_LINK="$GITHUB_BASE/osx/gdrive?raw=true"
 
-DBX_DEST=usr/local/bin/dbxcli
-GDRIVE_DEST=usr/local/bin/gdrive
+DBX_DEST=/usr/local/bin/dbxcli
+GDRIVE_DEST=/usr/local/bin/gdrive
 
 ## In case it doesn't exist
 mkdir -p /usr/local/bin
