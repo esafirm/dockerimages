@@ -14,6 +14,7 @@ RUN apk --no-cache add --update \
     ca-certificates \
     wget \
     unzip \
+    zip \
     libstdc++ \
     g++ \
     make \
