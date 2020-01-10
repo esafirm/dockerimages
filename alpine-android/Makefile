@@ -14,5 +14,8 @@ push:
 create: build push
 
 run:
+	docker run -it esafirm/alpine-android:$(tag) bash
+
+run_temp:
 	docker build -t esafirm/temp . && docker run -it -e DBX_AUTH_TOKEN=${DBX_AUTH_TOKEN} esafirm/temp /bin/bash
 

@@ -30,10 +30,14 @@ RUN curl -Lo ./firebase https://firebase.tools/bin/linux/latest \
     && mv firebase /bin/firebase
 
 ## Fastlane
-ENV FASTLANE_VERSION=2.138.0
+ENV FASTLANE_VERSION=2.140.0
 RUN apk --no-cache add --update curl-dev imagemagick \
     && gem install fastlane -N -v $FASTLANE_VERSION \
-    && gem install badge; exit 0
+    && gem install badge; exit 0;
+
+## Setup bundler to right version
+RUN yes | gem uninstall bundler --force \
+    && gem install bundler --version='1.17.3'; exit 0
 
 ## Resolve Jenkins issue https://github.com/gradle/gradle/issues/3117
 ENV LANG en_US.UTF-8
