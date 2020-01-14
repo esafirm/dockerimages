@@ -1,4 +1,4 @@
-FROM fadeltd/alpine-android-ndk
+FROM esafirm/android
 
 LABEL maintainer="BL"
 
@@ -44,18 +44,12 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-ENV GLIBC_VERSION "2.28-r0"
-RUN curl -s https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub \
-    && curl -sL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -o glibc.apk \
-    && curl -sL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk -o glibc-bin.apk \
-    && curl -sL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-i18n-${GLIBC_VERSION}.apk -o glibc-i18n.apk \
-    && apk add glibc-bin.apk glibc.apk glibc-i18n.apk \
-    && /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8 \
-    && rm -rf glibc.apk glibc-bin.apk glibc-i18n.apk
-
 ## Generating debug.keystore
 RUN keytool -genkey -v -keystore ~/.android/debug.keystore -alias androiddebugkey \
     -storepass android -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US" 
+
+## Add bash
+RUN apk --no-cache add bash
 
 WORKDIR /home/android
 
