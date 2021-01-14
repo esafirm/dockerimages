@@ -3,7 +3,7 @@
 
 SHELL:=/usr/bin/env bash
 
-NAME:=esafirm/android
+NAME:=esafirm/android-tiket
 tag ?= latest
 dir ?= ${pwd}
 
