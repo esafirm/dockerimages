@@ -7,7 +7,7 @@ ARG alpine_pkg_glibc_image=ubuntu:18.04
 FROM ${alpine_pkg_glibc_image} as libgcc
 RUN chmod +x /lib/x86_64-linux-gnu/libz.so.1.2.11
 
-FROM esafirm/bl-android-base:latest
+FROM esafirm/android-base:latest
 LABEL maintainer="Bukalapak"
 LABEL description="Android SDK 29 & NDK"
 
