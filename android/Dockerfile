@@ -5,18 +5,16 @@ FROM ${alpine_pkg_glibc_image} as libgcc
 RUN chmod +x /lib/x86_64-linux-gnu/libz.so.1.2.11
 
 FROM openjdk:8-alpine
-LABEL maintainer="Bukalapak"
-LABEL description="Android SDK 29 & NDK"
+LABEL maintainer="Esa Firman"
+LABEL description="Android SDK 30"
 
 ARG SDK_TOOLS="4333796"
 ARG GLIBC_VERSION="2.32-r0"
-ARG BUILD_TOOLS="29.0.3"
-ARG TARGET_SDK="29"
-ARG CMAKE_VERSION="3.6.4111459"
+ARG BUILD_TOOLS="30.0.3"
+ARG TARGET_SDK="30"
 
 ENV ANDROID_HOME "/opt/android-sdk-linux"
-ENV NDK_HOME $ANDROID_HOME/ndk-bundle
-ENV PATH=$PATH:$ANDROID_HOME/cmake/3.6.4111459/bin/:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
+ENV PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 ENV PATH=$PATH:$ANDROID_HOME/build-tools/$BUILD_TOOLS
 
 # Add the extra libs
@@ -51,37 +49,8 @@ RUN mkdir -p ~/.android/ && touch ~/.android/repositories.cfg && \
 # Install SDK Packages
 RUN yes | sdkmanager \
     "build-tools;${BUILD_TOOLS}" \
-    "platforms;android-${TARGET_SDK}"
-
-# Install NDK & CMAKE Packages
-RUN yes | sdkmanager \
-    "cmake;${CMAKE_VERSION}" \
-    "ndk-bundle" >/dev/null
-
-# Delete unnecessary NDK Packages
-RUN rm -rf  \
-    # Delete simpleperf tool
-    $NDK_HOME/simpleperf \
-    # Delete STL version we don't care about
-    $NDK_HOME/sources/cxx-stl/stlport \
-    $NDK_HOME/sources/cxx-stl/gnu-libstdc++ \
-    # Delete unused prebuild images
-    $NDK_HOME/prebuilt/android-mips* \
-    # Delete obsolete Android platforms
-    $NDK_HOME/platforms/android-9 \
-    $NDK_HOME/platforms/android-12 \
-    $NDK_HOME/platforms/android-13 \
-    $NDK_HOME/platforms/android-15 \
-    $NDK_HOME/platforms/android-16 \
-    # Delete unused platform sources
-    $NDK_HOME/sources/cxx-stl/gnu-libstdc++/4.9/libs/mips* \
-    $NDK_HOME/sources/cxx-stl/llvm-libc++/libs/mips* \
-    # Delete LLVM STL tests
-    $NDK_HOME/sources/cxx-stl/llvm-libc++/test \
-    # Delete unused toolchains
-    $NDK_HOME/toolchains/mips \
-    $NDK_HOME/build/core/toolchains/mips* \
-    && sdkmanager --list | sed -e '/Available Packages/q'
+    "platforms;android-${TARGET_SDK}" && \
+    rm -rf /tmp/PackageOperation*
 
 # Install Bash for Gradlew
 RUN apk --no-cache add bash
