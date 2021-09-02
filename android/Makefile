@@ -1,5 +1,5 @@
 .DEFAULT_GOAL:=build
-.PHONY=build push run create
+.PHONY=build push run create help
 
 SHELL:=/usr/bin/env bash
 
@@ -7,17 +7,21 @@ NAME:=esafirm/android
 tag ?= latest
 dir ?= ${pwd}
 
-build: 
+help:	## Show this help.
+	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
+
+build:	## Build the docker image. Accept $tag
 	docker build -t $(NAME):$(tag) .
 
-push:
+push:	## Push the docker image to docker hub. Accept $tag
 	docker push $(NAME):$(tag)
 
-create: build push
+create: ## Build and push the image
+	build push
 
-run:
+run:	## Run the image. Accept $dir and $tag
 	docker run -it -v $(dir):/home/android $(NAME):$(tag) bash
 
-run_temp:
+run_temp:	## Build and run the image
 	docker build --no-cache -t $(NAME):temp . && docker run -it $(NAME) /bin/bash
 
